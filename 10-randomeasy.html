@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number Guessing Game</title>
+        <style>
+         body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f8ff;
+        text-align: center;
+        padding-top: 50px;
+      }
+
+      h1 {
+        color: #333;
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        color: #666;
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+
+      .guess {
+        padding: 10px;
+        font-size: 16px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      .number, .restart {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 10px 5px;
+        border: none;
+        border-radius: 6px;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+      }
+
+      .restart {
+        background-color: #2196f3;
+      }
+
+      .number:hover {
+        background-color: #45a049;
+      }
+
+      .restart:hover {
+        background-color: #0b7dda;
+      }
+
+      .guessing, .attempts {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #444;
+      }
+    </style>
+
+    </head>
+ <body>
+    <h1>Number Guessing Game🔢</h1>
+    <h2>Guess a number between 1-50 🤔</h2>
+    <input class="guess" type="text" placeholder="Enter the number">
+    <button class="number" onclick="guessingNumber();">Enter</button>
+    <button class="restart" onclick="restart();">Restart</button>
+    <p class="guessing"></p>
+
+    <p class="attempts" ></p>
+
+
+    <script>
+          let input= Math.floor(Math.random() * 51);
+        function guessingNumber(){
+          
+
+            let guess=Number(document.querySelector('.guess').value);
+            if(input===guess){
+                document.querySelector('.guessing').innerHTML=`The number you guessed ${guess} is right 🎉. `;
+                attempts();
+            }
+            
+            else
+            {
+                if(guess<input){
+                     document.querySelector('.guessing').innerHTML=`The number you guessed ${guess} is less.`;
+                      attempts();
+                }
+                else{
+                     document.querySelector('.guessing').innerHTML=`The number you guessed ${guess} is greater.`;
+                      attempts();
+                }
+            }
+
+        }
+        let attempt=5;
+
+        function attempts(){
+             let guess=Number(document.querySelector('.guess').value);
+                attempt--; 
+             if(input===guess){
+
+                document.querySelector('.attempts').innerHTML=`Remaining Attempts:${attempt}`;
+                stop();
+                
+             }
+             else if(attempt<=0){
+                document.querySelector('.attempts').innerHTML=`You failed`;
+                
+              stop();
+                
+              }
+             else{
+               
+                document.querySelector('.attempts').innerHTML=`Remaining Attempts:${attempt}`;
+
+             }
+            }
+
+
+         function stop(){
+           
+                  document.querySelector('.attempts').innerHTML=`Game over`;
+                   let input=document.querySelector('.guess');
+                   document.querySelector('.guess').value=" ";
+                    input.disabled=true;
+                  let button=  document.querySelector('.number');
+
+                      button.disabled = true;
+         }
+
+
+         function restart(){
+            
+        input= Math.floor(Math.random() * 51);
+          attempt=5;
+          
+         document.querySelector('.guess').value=" ";
+         document.querySelector('.guessing').innerHTML=" ";
+         document.querySelector('.attempts').innerHTML=" ";
+          const guessInput = document.querySelector('.guess');
+    guessInput.disabled = false;
+
+    const button = document.querySelector('.number');
+    button.disabled = false;
+         }
+        
+    </script>
+ </body>
+</html>
